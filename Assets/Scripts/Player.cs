@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
 
     private bool isWalking = false;
 
-    private void Awake() {
+    private void Start() {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
     }
 
