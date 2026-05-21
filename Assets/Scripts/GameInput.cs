@@ -15,10 +15,8 @@ public class GameInput : MonoBehaviour {
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
-        // When there are no listeners I cannot invoke - != null checks for listeners
-        if (OnInteractAction != null) {
-            OnInteractAction.Invoke(this, EventArgs.Empty);
-        }
+        // When there are no listeners I cannot invoke - ? checks for listeners (the value of expression before ?)
+        OnInteractAction?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector2 GetMovementVectorNormalised() {
