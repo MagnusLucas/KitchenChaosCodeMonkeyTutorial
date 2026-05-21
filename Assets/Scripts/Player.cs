@@ -1,3 +1,4 @@
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -10,9 +11,16 @@ public class Player : MonoBehaviour {
 
     private bool isWalking = false;
 
+    private void Awake() {
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, EventArgs e) {
+        HandleInteractions();
+    }
+
     private void Update() {
         HandleMovement();
-        HandleInteractions();
     }
 
     public bool IsWalking() {
