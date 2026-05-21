@@ -4,38 +4,60 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    public static Player Instance { get; private set; }
+
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public class OnSelectedCounterChangedEventArgs : EventArgs {
+        public ClearCounter selectedCounter;
+    }
+
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float rotateSpeed = 0.1f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask countersLayerMask;
 
     private bool isWalking = false;
+    private ClearCounter selectedCounter;
+
+    public void Awake() {
+        if (Instance != null) {
+            Debug.LogError("There is more than one player instance");
+        }
+        Instance = this;
+    }
 
     private void Start() {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
     }
 
     private void GameInput_OnInteractAction(object sender, EventArgs e) {
-        HandleInteractions();
+        selectedCounter?.Interact();
     }
 
     private void Update() {
         HandleMovement();
+        DetectInteractibles();
     }
 
     public bool IsWalking() {
         return isWalking;
     }
 
-    private void HandleInteractions() {
+    private void DetectInteractibles() {
         float reachLength = 1.0f;
 
         bool reachedSomething = Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, reachLength, countersLayerMask);
 
         if (reachedSomething) {
             if (raycastHit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter)) {
-                clearCounter.Interact();
+                if (clearCounter != selectedCounter) {
+                    SetSelectedCounter(clearCounter);
+                }
+            } else {
+                SetSelectedCounter(null);
             }
+        } else {
+            SetSelectedCounter(null);
         }
     }
 
@@ -66,6 +88,14 @@ public class Player : MonoBehaviour {
                 transform.position += new Vector3(0, 0, moveDir.z) * moveDistance;
             }
         }
+    }
+
+    private void SetSelectedCounter(ClearCounter newSelectedCounter) {
+        selectedCounter = newSelectedCounter;
+
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs {
+            selectedCounter = selectedCounter
+        });
     }
 
 }
