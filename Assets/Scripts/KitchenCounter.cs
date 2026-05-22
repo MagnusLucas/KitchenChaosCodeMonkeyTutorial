@@ -2,9 +2,9 @@ using UnityEngine;
 
 abstract public class KitchenCounter : MonoBehaviour, IKitchenObjectParent {
 
-    [SerializeField] protected Transform kitchenObjectHookPoint;
+    [SerializeField] private Transform kitchenObjectHookPoint;
 
-    protected KitchenObject kitchenObject;
+    private KitchenObject kitchenObject;
 
     abstract public void Interact(Player player);
 

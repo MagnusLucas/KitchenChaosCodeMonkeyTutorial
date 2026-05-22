@@ -5,17 +5,17 @@ public class ContainerCounter : KitchenCounter {
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
     override public void Interact(Player player) {
-        if (kitchenObject == null) {
+        if (!HasKitchenObject()) {
             if (player.HasKitchenObject()) {
                 player.GetKitchenObject().SetKitchenObjectParent(this);
             } else {
-                Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab, kitchenObjectHookPoint);
-                kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
+                Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
+                kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
             }
 
         } else {
             if (!player.HasKitchenObject()) {
-                kitchenObject.SetKitchenObjectParent(player);
+                GetKitchenObject().SetKitchenObjectParent(player);
             }
         }
     }
