@@ -2,7 +2,7 @@ using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IKitchenObjectParent {
 
     public static Player Instance { get; private set; }
 
@@ -15,9 +15,11 @@ public class Player : MonoBehaviour {
     [SerializeField] private float rotateSpeed = 0.1f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask countersLayerMask;
+    [SerializeField] private Transform kitchenObjectHookPoint;
 
     private bool isWalking = false;
     private ClearCounter selectedCounter;
+    private KitchenObject heldKitchenObject;
 
     public void Awake() {
         if (Instance != null) {
@@ -31,7 +33,7 @@ public class Player : MonoBehaviour {
     }
 
     private void GameInput_OnInteractAction(object sender, EventArgs e) {
-        selectedCounter?.Interact();
+        selectedCounter?.Interact(this);
     }
 
     private void Update() {
@@ -98,4 +100,23 @@ public class Player : MonoBehaviour {
         });
     }
 
+    public Transform GetKitchenObjectHookPoint() {
+        return kitchenObjectHookPoint;
+    }
+
+    public void SetKitchenObject(KitchenObject newKitchenObject) {
+        heldKitchenObject = newKitchenObject;
+    }
+
+    public KitchenObject GetKitchenObject() {
+        return heldKitchenObject;
+    }
+
+    public void ClearKitchenObject() {
+        heldKitchenObject = null;
+    }
+
+    public bool HasKitchenObject() {
+        return (heldKitchenObject != null);
+    }
 }
