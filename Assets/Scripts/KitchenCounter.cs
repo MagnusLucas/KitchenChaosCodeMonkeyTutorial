@@ -6,6 +6,12 @@ abstract public class KitchenCounter : MonoBehaviour, IKitchenObjectParent {
 
     private KitchenObject kitchenObject;
 
+    public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO) {
+        Transform spawnedObjectTransform = Instantiate(kitchenObjectSO.prefab);
+        KitchenObject spawnedObject = spawnedObjectTransform.GetComponent<KitchenObject>();
+        return spawnedObject;
+    }
+
     virtual public void Interact(Player player) {
         if (kitchenObject == null && player.HasKitchenObject()) {
             player.GetKitchenObject().SetKitchenObjectParent(this);

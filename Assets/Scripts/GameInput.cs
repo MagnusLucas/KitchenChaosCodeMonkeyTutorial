@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameInput : MonoBehaviour {
 
     public event EventHandler OnInteractAction;
+    public event EventHandler OnSecondaryInteractAction;
 
     private PlayerInputActions playerInputActions;
 
@@ -12,10 +13,14 @@ public class GameInput : MonoBehaviour {
         playerInputActions.Player.Enable();
 
         playerInputActions.Player.Interact.performed += Interact_performed;
+        playerInputActions.Player.SecondaryInteract.performed += SecondaryInteract_performed;
+    }
+
+    private void SecondaryInteract_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnSecondaryInteractAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
-        // When there are no listeners I cannot invoke - ? checks for listeners (the value of expression before ?)
         OnInteractAction?.Invoke(this, EventArgs.Empty);
     }
 
