@@ -7,14 +7,24 @@ public class CuttingCounter : KitchenCounter {
 
     public void SecondaryInteract() {
         if (HasKitchenObject()) {
-            foreach (CuttingRecipeSO recipe in cuttingRecipeSOs) {
-                if (recipe.ingredient == GetKitchenObject().GetKitchenObjectSO()) {
-                    GetKitchenObject().DestroySelf();
-                    KitchenCounter.SpawnKitchenObject(recipe.result, this);
-                    return;
-                }
+
+            CuttingRecipeSO recipe = GetRecipeForObjectOrNull(GetKitchenObject().GetKitchenObjectSO());
+
+            if (recipe != null) {
+                GetKitchenObject().DestroySelf();
+                KitchenCounter.SpawnKitchenObject(recipe.result, this);
+            }
+
+        }
+    }
+
+    private CuttingRecipeSO GetRecipeForObjectOrNull(KitchenObjectSO kitchenObjectSO) {
+        foreach (CuttingRecipeSO recipe in cuttingRecipeSOs) {
+            if (recipe.ingredient == kitchenObjectSO) {
+                return recipe;
             }
         }
+        return null;
     }
 
 }
