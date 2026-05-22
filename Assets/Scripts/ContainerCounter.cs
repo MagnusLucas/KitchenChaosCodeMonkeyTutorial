@@ -1,6 +1,9 @@
+using System;
 using UnityEngine;
 
 public class ContainerCounter : KitchenCounter {
+
+    public event EventHandler OnKitchenObjectSpawned;
 
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
@@ -11,6 +14,7 @@ public class ContainerCounter : KitchenCounter {
             } else {
                 Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
                 kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
+                OnKitchenObjectSpawned?.Invoke(this, EventArgs.Empty);
             }
 
         } else {
