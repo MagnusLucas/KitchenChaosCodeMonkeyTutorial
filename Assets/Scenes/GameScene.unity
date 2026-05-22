@@ -815,6 +815,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1470280672
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 780860414122786553, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.270971
+      objectReference: {fileID: 0}
+    - target: {fileID: 780860414122786553, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000004397475
+      objectReference: {fileID: 0}
+    - target: {fileID: 780860414122786553, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.286724
+      objectReference: {fileID: 0}
+    - target: {fileID: 780860414122786553, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 780860414122786553, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780860414122786553, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 780860414122786553, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780860414122786553, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780860414122786553, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 780860414122786553, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6417746911589741421, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
+      propertyPath: m_Name
+      value: ContainerCounter_Tomato
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0b680a24cf8d0fd4d8e7bb6e69b364bf, type: 3}
 --- !u!1001 &1533677573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1100,3 +1157,4 @@ SceneRoots:
   - {fileID: 1533677573}
   - {fileID: 35456841}
   - {fileID: 631988701}
+  - {fileID: 1470280672}

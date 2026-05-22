@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3215637063171948852}
   m_Layer: 6
-  m_Name: SpawnPoint
+  m_Name: KitchenObjectHookPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

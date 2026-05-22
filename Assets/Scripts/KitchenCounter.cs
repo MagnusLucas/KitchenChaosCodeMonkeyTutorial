@@ -6,8 +6,15 @@ abstract public class KitchenCounter : MonoBehaviour, IKitchenObjectParent {
 
     private KitchenObject kitchenObject;
 
-    abstract public void Interact(Player player);
-
+    virtual public void Interact(Player player) {
+        if (kitchenObject == null && player.HasKitchenObject()) {
+            player.GetKitchenObject().SetKitchenObjectParent(this);
+            return;
+        }
+        if (kitchenObject != null && !player.HasKitchenObject()) {
+            kitchenObject.SetKitchenObjectParent(player);
+        }
+    }
 
     public Transform GetKitchenObjectHookPoint() {
         return kitchenObjectHookPoint;
