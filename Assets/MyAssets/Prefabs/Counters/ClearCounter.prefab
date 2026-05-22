@@ -116,7 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectedCounterVisual
   kitchenCounter: {fileID: 1719518397906062189}
-  visualGameObject: {fileID: 3297458652116002750}
+  visualGameObjects:
+  - {fileID: 3297458652116002750}
 --- !u!1001 &8733919606402384762
 PrefabInstance:
   m_ObjectHideFlags: 0

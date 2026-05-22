@@ -3,7 +3,7 @@ using UnityEngine;
 public class SelectedCounterVisual : MonoBehaviour
 {
     [SerializeField] private KitchenCounter kitchenCounter;
-    [SerializeField] private GameObject visualGameObject;
+    [SerializeField] private GameObject[] visualGameObjects;
 
     private void Start() {
         Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
@@ -18,10 +18,14 @@ public class SelectedCounterVisual : MonoBehaviour
     }
 
     private void Show() {
-        visualGameObject.SetActive(true);
+        foreach (GameObject obj in visualGameObjects) {
+            obj.SetActive(true);
+        }
     }
 
     private void Hide() {
-        visualGameObject.SetActive(false);
+        foreach (GameObject obj in visualGameObjects) {
+            obj.SetActive(false);
+        }
     }
 }
