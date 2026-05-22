@@ -3,12 +3,17 @@ using UnityEngine;
 
 public class CuttingCounter : KitchenCounter {
 
-    [SerializeField] private KitchenObjectSO cutKitchenObjectSO;
+    [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOs;
 
     public void SecondaryInteract() {
         if (HasKitchenObject()) {
-            GetKitchenObject().DestroySelf();
-            KitchenCounter.SpawnKitchenObject(cutKitchenObjectSO, this);
+            foreach (CuttingRecipeSO recipe in cuttingRecipeSOs) {
+                if (recipe.ingredient == GetKitchenObject().GetKitchenObjectSO()) {
+                    GetKitchenObject().DestroySelf();
+                    KitchenCounter.SpawnKitchenObject(recipe.result, this);
+                    return;
+                }
+            }
         }
     }
 

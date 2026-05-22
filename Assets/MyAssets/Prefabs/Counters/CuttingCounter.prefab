@@ -294,6 +294,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CuttingCounter
   kitchenObjectHookPoint: {fileID: 1571875789428973507}
+  cuttingRecipeSOs:
+  - {fileID: 11400000, guid: d7b057dc5bdd2874a9f1978cc7947cc8, type: 2}
+  - {fileID: 11400000, guid: 9c3668c6cb3c23245bcb0ec8082b205f, type: 2}
+  - {fileID: 11400000, guid: d6a57078fbc69b7469117dc6af2074b5, type: 2}
 --- !u!4 &7812082343325998139 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6132292924258288332, guid: 757cd680eaed2014bbe0e19142613de6, type: 3}
