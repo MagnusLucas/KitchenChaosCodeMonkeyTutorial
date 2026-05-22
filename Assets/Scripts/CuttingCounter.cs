@@ -8,7 +8,7 @@ public class CuttingCounter : KitchenCounter {
     public void SecondaryInteract() {
         if (HasKitchenObject()) {
             GetKitchenObject().DestroySelf();
-            KitchenCounter.SpawnKitchenObject(cutKitchenObjectSO).SetKitchenObjectParent(this);
+            KitchenCounter.SpawnKitchenObject(cutKitchenObjectSO, this);
         }
     }
 

@@ -12,7 +12,7 @@ public class ContainerCounter : KitchenCounter {
             if (player.HasKitchenObject()) {
                 player.GetKitchenObject().SetKitchenObjectParent(this);
             } else {
-                KitchenCounter.SpawnKitchenObject(kitchenObjectSO).SetKitchenObjectParent(player);
+                KitchenCounter.SpawnKitchenObject(kitchenObjectSO, player);
                 OnKitchenObjectSpawned?.Invoke(this, EventArgs.Empty);
             }
 
