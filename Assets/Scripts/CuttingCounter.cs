@@ -1,24 +1,39 @@
 using System;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
-public class CuttingCounter : KitchenCounter {
+public class CuttingCounter : KitchenCounter, IProgressAction {
 
     public event EventHandler OnCutPerformed;
+    public event EventHandler<ProgressEventArgs> OnProgressUpdated;
+    override public event EventHandler OnKitchenObjectReceived;
 
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOs;
     private int cuttingProgress;
 
-    public override void Interact(Player player) {
-        base.Interact(player);
+
+    public override void GetKitchenObject(Player player) {
         cuttingProgress = 0;
+        player.GetKitchenObject().SetKitchenObjectParent(this);
+
+        if (GetRecipeForObjectOrNull(GetKitchenObject().GetKitchenObjectSO()) != null) {
+            OnKitchenObjectReceived?.Invoke(this, EventArgs.Empty);
+        }
     }
 
-    public void SecondaryInteract() {
+    public void SecondaryInteract(Player player) {
+        if (player.HasKitchenObject()) {
+            return;
+        }
         if (HasKitchenObject()) {
-            cuttingProgress++;
-            OnCutPerformed?.Invoke(this, EventArgs.Empty);
             CuttingRecipeSO recipe = GetRecipeForObjectOrNull(GetKitchenObject().GetKitchenObjectSO());
+            if (recipe == null) {
+                return;
+            }
+            cuttingProgress++;
+            OnProgressUpdated?.Invoke(this, new ProgressEventArgs { progress = GetProgress() });
+            OnCutPerformed?.Invoke(this, EventArgs.Empty);
 
             if (cuttingProgress == recipe.cuttingProgressMax) {
                 GetKitchenObject().DestroySelf();
@@ -37,4 +52,13 @@ public class CuttingCounter : KitchenCounter {
         return null;
     }
 
+    public float GetProgress() {
+        CuttingRecipeSO recipe = GetRecipeForObjectOrNull(GetKitchenObject().GetKitchenObjectSO());
+
+        if (recipe != null) {
+            return cuttingProgress.ConvertTo<float>() / recipe.cuttingProgressMax;
+        }
+
+        throw new NotImplementedException();
+    }
 }

@@ -1,6 +1,10 @@
+using System;
 using UnityEngine;
 
 abstract public class KitchenCounter : MonoBehaviour, IKitchenObjectParent {
+
+    virtual public event EventHandler OnKitchenObjectReceived;
+    virtual public event EventHandler OnKitchenObjectRemoved;
 
     [SerializeField] private Transform kitchenObjectHookPoint;
 
@@ -14,13 +18,23 @@ abstract public class KitchenCounter : MonoBehaviour, IKitchenObjectParent {
     }
 
     virtual public void Interact(Player player) {
-        if (kitchenObject == null && player.HasKitchenObject()) {
-            player.GetKitchenObject().SetKitchenObjectParent(this);
+        if (!HasKitchenObject() && player.HasKitchenObject()) {
+            GetKitchenObject(player);
             return;
         }
-        if (kitchenObject != null && !player.HasKitchenObject()) {
-            kitchenObject.SetKitchenObjectParent(player);
+        if (HasKitchenObject() && !player.HasKitchenObject()) {
+            GiveKitchenObject(player);
         }
+    }
+
+    virtual public void GetKitchenObject(Player player) {
+        player.GetKitchenObject().SetKitchenObjectParent(this);
+        OnKitchenObjectReceived?.Invoke(this, EventArgs.Empty);
+    }
+
+    virtual public void GiveKitchenObject(Player player) {
+        kitchenObject.SetKitchenObjectParent(player);
+        OnKitchenObjectRemoved?.Invoke(this, EventArgs.Empty);
     }
 
     public Transform GetKitchenObjectHookPoint() {

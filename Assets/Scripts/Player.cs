@@ -35,7 +35,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
     private void GameInput_OnSecondaryInteractAction(object sender, EventArgs e) {
         if (selectedCounter is CuttingCounter) {
-            (selectedCounter as CuttingCounter).SecondaryInteract();
+            (selectedCounter as CuttingCounter).SecondaryInteract(this);
         }
     }
 
