@@ -18,12 +18,46 @@ abstract public class KitchenCounter : MonoBehaviour, IKitchenObjectParent {
     }
 
     virtual public void Interact(Player player) {
-        if (!HasKitchenObject() && player.HasKitchenObject()) {
-            GetKitchenObject(player);
+        if (player.HasKitchenObject()) {
+
+            if (!HasKitchenObject()) {
+                GetKitchenObject(player);
+                return;
+            }
+
+            if (player.GetKitchenObject() is PlateKitchenObject) {
+                if (GetKitchenObject() is PlateKitchenObject) {
+                    return;
+                }
+                InteractWithPlate(player.GetKitchenObject() as PlateKitchenObject, GetKitchenObject());
+
+                return;
+            }
+
+            if (GetKitchenObject() is PlateKitchenObject) {
+                InteractWithPlate(GetKitchenObject() as PlateKitchenObject, player.GetKitchenObject());
+            }
+
             return;
         }
-        if (HasKitchenObject() && !player.HasKitchenObject()) {
+
+        if (HasKitchenObject()) {
             GiveKitchenObject(player);
+            return;
+        }
+
+        InteractNoObjects(player);
+    }
+
+    virtual public void InteractNoObjects(Player player) {
+    }
+
+    virtual public void InteractWithPlate(PlateKitchenObject plate, KitchenObject kitchenObject) {
+        bool hadKitchenObject = HasKitchenObject();
+        plate.AddIngredient(kitchenObject.GetKitchenObjectSO());
+        kitchenObject.DestroySelf();
+        if (hadKitchenObject && !HasKitchenObject()) {
+            OnKitchenObjectRemoved?.Invoke(this, EventArgs.Empty);
         }
     }
 

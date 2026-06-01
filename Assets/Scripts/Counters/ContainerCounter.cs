@@ -7,20 +7,9 @@ public class ContainerCounter : KitchenCounter {
 
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
-    override public void Interact(Player player) {
-        if (!HasKitchenObject()) {
-            if (player.HasKitchenObject()) {
-                player.GetKitchenObject().SetKitchenObjectParent(this);
-            } else {
-                KitchenCounter.SpawnKitchenObject(kitchenObjectSO, player);
-                OnKitchenObjectSpawned?.Invoke(this, EventArgs.Empty);
-            }
-
-        } else {
-            if (!player.HasKitchenObject()) {
-                GetKitchenObject().SetKitchenObjectParent(player);
-            }
-        }
+    public override void InteractNoObjects(Player player) {
+        KitchenCounter.SpawnKitchenObject(kitchenObjectSO, player);
+        OnKitchenObjectSpawned?.Invoke(this, EventArgs.Empty);
     }
 
 }

@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 
 public class StoveCounter : KitchenCounter, IProgressAction {
@@ -11,9 +12,12 @@ public class StoveCounter : KitchenCounter, IProgressAction {
     private float fryTime;
     private FryingRecipeSO currentRecipe;
 
+    private void Start() {
+        OnKitchenObjectRemoved += StoveCounter_OnKitchenObjectRemoved;
+    }
 
-    private void StoveCounter_OnKitchenObjectReceived(object sender, EventArgs e) {
-        throw new NotImplementedException();
+    private void StoveCounter_OnKitchenObjectRemoved(object sender, EventArgs e) {
+        fryTime = 0;
     }
 
     private void Update() {
@@ -22,7 +26,7 @@ public class StoveCounter : KitchenCounter, IProgressAction {
                 return;
             }
             fryTime += Time.deltaTime;
-            OnProgressUpdated?.Invoke(this, new ProgressEventArgs { progress = fryTime / currentRecipe.fryTime });
+            OnProgressUpdated?.Invoke(this, new ProgressEventArgs { progress = GetProgress() });
             if (fryTime >= currentRecipe.fryTime) {
                 GetKitchenObject().DestroySelf();
                 KitchenCounter.SpawnKitchenObject(currentRecipe.result, this);
@@ -46,12 +50,6 @@ public class StoveCounter : KitchenCounter, IProgressAction {
         OnKitchenObjectReceived?.Invoke(this, EventArgs.Empty);
     }
 
-    public override void GiveKitchenObject(Player player) {
-        base.GiveKitchenObject(player);
-        fryTime = 0;
-    }
-
-
     private FryingRecipeSO GetRecipeForObjectOrNull(KitchenObjectSO kitchenObjectSO) {
         foreach (FryingRecipeSO recipe in fryingRecipeSOs) {
             if (recipe.ingredient == kitchenObjectSO) {
@@ -62,6 +60,6 @@ public class StoveCounter : KitchenCounter, IProgressAction {
     }
 
     public float GetProgress() {
-        throw new NotImplementedException();
+        return fryTime / currentRecipe.fryTime;
     }
 }
