@@ -41,9 +41,13 @@ public class PlateKitchenObject : KitchenObject {
     public void ClearIngredients() {
         ingredients.Clear();
         foreach (GameObject ingredient in ingredientPrefabs) {
+            if (ingredient.TryGetComponent<BreadKitchenObject>(out BreadKitchenObject breadKitchenObject)) {
+                breadKitchenObject.ClearPlate();
+            }
             Destroy(ingredient);
         }
         ingredientPrefabs.Clear();
+        breadKitchenObject = null;
     }
 
     private float GetHeight() {
