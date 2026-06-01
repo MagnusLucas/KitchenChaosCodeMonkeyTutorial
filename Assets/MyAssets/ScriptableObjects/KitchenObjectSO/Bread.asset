@@ -15,4 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 6659130385310673413, guid: fe89a59fc4b9a6240bb6aa244b6f98ed, type: 3}
   sprite: {fileID: 21300000, guid: 77b28124b8bda494381c80bd5aa42c22, type: 3}
   objectName: bread
-  height: 0.2
+  height: 0.52

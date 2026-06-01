@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlateKitchenObject : KitchenObject {
@@ -15,6 +16,8 @@ public class PlateKitchenObject : KitchenObject {
 
     private List<KitchenObjectSO> ingredients;
     private List<GameObject> ingredientPrefabs;
+    private BreadKitchenObject breadKitchenObject;
+
 
     private void Awake() {
         ingredients = new List<KitchenObjectSO>();
@@ -22,13 +25,16 @@ public class PlateKitchenObject : KitchenObject {
     }
 
     public void AddIngredient(KitchenObjectSO ingredient) {
-        ingredients.Add(ingredient);
         GameObject ingredientVisual = Instantiate(ingredient.prefab, kitchenObjecHookPoint).gameObject;
-        ingredientPrefabs.Add(ingredientVisual);
-        ingredientVisual.transform.localPosition += Vector3.up * GetHeight();
-        if (ingredientVisual.TryGetComponent<BreadKitchenObject>(out BreadKitchenObject breadKitchenObject)) {
-            breadKitchenObject.SetPlate(this);
+        if (breadKitchenObject == null) {
+            if (ingredientVisual.TryGetComponent<BreadKitchenObject>(out BreadKitchenObject breadKitchenObject)) {
+                breadKitchenObject.SetPlate(this);
+                this.breadKitchenObject = breadKitchenObject;
+            }
         }
+        ingredientVisual.transform.localPosition += Vector3.up * GetHeight();
+        ingredients.Add(ingredient);
+        ingredientPrefabs.Add(ingredientVisual);
         OnIngredientAdded?.Invoke(this, new IngredientAddedEventArgs { ingredient = ingredient });
     }
 
@@ -41,10 +47,27 @@ public class PlateKitchenObject : KitchenObject {
     }
 
     private float GetHeight() {
+        const string BREAD = "bread";
+        const float BREAD_TOP_HEIGHT = 0.3f;
+
+        if (ingredients.Count < 1) {
+            return 0;
+        }
+
         float sum = 0;
+
         foreach (KitchenObjectSO ingredient in ingredients) {
             sum += ingredient.height;
         }
+
+        bool startsWithBread = ingredients.First().objectName.Equals(BREAD);
+
+
+        if (startsWithBread) {
+
+            sum -= BREAD_TOP_HEIGHT;
+        }
+
         return sum;
     }
 

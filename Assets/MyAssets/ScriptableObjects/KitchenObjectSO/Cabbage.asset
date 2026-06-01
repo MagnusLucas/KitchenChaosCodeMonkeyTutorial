@@ -15,3 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 6659130385310673413, guid: 81efc4b150864aa4db15edcce7b599a5, type: 3}
   sprite: {fileID: 21300000, guid: e1c23b5aded59d84da30738d3267a6c9, type: 3}
   objectName: cabbage
+  height: 0.4

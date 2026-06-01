@@ -15,3 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 6659130385310673413, guid: 62be96a1ffe10d844890a9a4eb273601, type: 3}
   sprite: {fileID: 21300000, guid: 713ea9afa60dd6e4ebf6503a33e8cc99, type: 3}
   objectName: meat patty burned
+  height: 0.11
