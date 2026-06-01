@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6659130385310673413}
-  - component: {fileID: 6029246722307538318}
+  - component: {fileID: 8938691824859485893}
   m_Layer: 0
   m_Name: Bread
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 757849970902603915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6029246722307538318
+--- !u!114 &8938691824859485893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,9 +42,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6254769749213156385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f24e34493cf02a24ba5318431a9129fa, type: 3}
+  m_Script: {fileID: 11500000, guid: da0c6ec8dbd6d8f459a69485b417d262, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KitchenObject
+  m_EditorClassIdentifier: Assembly-CSharp::BreadKitchenObject
   kitchenObjectSO: {fileID: 11400000, guid: 64581d15f28dfe84b879a93fd00dc6ca, type: 2}
 --- !u!1001 &4498642494351216139
 PrefabInstance:
@@ -101,10 +101,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2278059630995854716, guid: bc49891f572f1164e9938f845ec37ab0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7138834464023285930}
   m_SourcePrefab: {fileID: 100100000, guid: bc49891f572f1164e9938f845ec37ab0, type: 3}
 --- !u!4 &757849970902603915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3812876574508226176, guid: bc49891f572f1164e9938f845ec37ab0, type: 3}
   m_PrefabInstance: {fileID: 4498642494351216139}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2446343731824188279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2278059630995854716, guid: bc49891f572f1164e9938f845ec37ab0, type: 3}
+  m_PrefabInstance: {fileID: 4498642494351216139}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7138834464023285930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2446343731824188279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63c1608b89615b4b8bc5827061c0ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BreadTopVisual
+  breadKitchenObject: {fileID: 8938691824859485893}

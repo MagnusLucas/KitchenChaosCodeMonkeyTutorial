@@ -1,8 +1,15 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlateKitchenObject : KitchenObject {
+
+    public class IngredientAddedEventArgs {
+        public KitchenObjectSO ingredient;
+    }
+
+    public event EventHandler<IngredientAddedEventArgs> OnIngredientAdded;
 
     [SerializeField] private Transform kitchenObjecHookPoint;
 
@@ -18,6 +25,11 @@ public class PlateKitchenObject : KitchenObject {
         ingredients.Add(ingredient);
         GameObject ingredientVisual = Instantiate(ingredient.prefab, kitchenObjecHookPoint).gameObject;
         ingredientPrefabs.Add(ingredientVisual);
+        ingredientVisual.transform.localPosition += Vector3.up * GetHeight();
+        if (ingredientVisual.TryGetComponent<BreadKitchenObject>(out BreadKitchenObject breadKitchenObject)) {
+            breadKitchenObject.SetPlate(this);
+        }
+        OnIngredientAdded?.Invoke(this, new IngredientAddedEventArgs { ingredient = ingredient });
     }
 
     public void ClearIngredients() {
@@ -27,4 +39,13 @@ public class PlateKitchenObject : KitchenObject {
         }
         ingredientPrefabs.Clear();
     }
+
+    private float GetHeight() {
+        float sum = 0;
+        foreach (KitchenObjectSO ingredient in ingredients) {
+            sum += ingredient.height;
+        }
+        return sum;
+    }
+
 }
