@@ -22,9 +22,22 @@ public class IngredientListUI : MonoBehaviour {
 
     private void Start() {
         plateKitchenObject.OnIngredientAdded += PlateKitchenObject_OnIngredientAdded;
+        plateKitchenObject.OnPlateCleared += PlateKitchenObject_OnPlateCleared;
     }
 
-    public void ResetPosition() {
+    private void PlateKitchenObject_OnPlateCleared(object sender, System.EventArgs e) {
+        ResetList();
+    }
+
+    public void ResetList() {
+        foreach (var item in ingredientImages) {
+            Destroy(item.gameObject);
+        }
+        ingredientImages.Clear();
+        ResetPosition();
+    }
+
+    private void ResetPosition() {
         transform.localPosition = resetPosition;
     }
 

@@ -11,6 +11,7 @@ public class PlateKitchenObject : KitchenObject {
     }
 
     public event EventHandler<IngredientAddedEventArgs> OnIngredientAdded;
+    public event EventHandler OnPlateCleared;
 
     [SerializeField] private Transform kitchenObjecHookPoint;
 
@@ -26,7 +27,7 @@ public class PlateKitchenObject : KitchenObject {
 
     public void AddIngredient(KitchenObjectSO ingredient) {
         GameObject ingredientVisual = Instantiate(ingredient.prefab, kitchenObjecHookPoint).gameObject;
-        if (breadKitchenObject == null) {
+        if (ingredients.Count == 0) {
             if (ingredientVisual.TryGetComponent<BreadKitchenObject>(out BreadKitchenObject breadKitchenObject)) {
                 breadKitchenObject.SetPlate(this);
                 this.breadKitchenObject = breadKitchenObject;
@@ -48,6 +49,7 @@ public class PlateKitchenObject : KitchenObject {
         }
         ingredientPrefabs.Clear();
         breadKitchenObject = null;
+        OnPlateCleared?.Invoke(this, EventArgs.Empty);
     }
 
     private float GetHeight() {
