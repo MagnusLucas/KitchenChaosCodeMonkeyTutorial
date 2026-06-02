@@ -10,13 +10,16 @@ public class BreadKitchenObject : KitchenObject {
     public void SetPlate(PlateKitchenObject newPlate) {
         plate = newPlate;
         plate.OnIngredientAdded += Plate_OnIngredientAdded;
+        plate.OnPlateCleared += Plate_OnPlateCleared;
     }
 
-    public void ClearPlate() {
-        if (plate == null) {
-            return;
-        }
+    private void Plate_OnPlateCleared(object sender, EventArgs e) {
+        ClearPlate();
+    }
+
+    private void ClearPlate() {
         plate.OnIngredientAdded -= Plate_OnIngredientAdded;
+        plate.OnPlateCleared -= Plate_OnPlateCleared;
         plate = null;
     }
 
