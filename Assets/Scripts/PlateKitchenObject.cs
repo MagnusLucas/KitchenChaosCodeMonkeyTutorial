@@ -17,7 +17,6 @@ public class PlateKitchenObject : KitchenObject {
 
     private List<KitchenObjectSO> ingredients;
     private List<GameObject> ingredientPrefabs;
-    private BreadKitchenObject breadKitchenObject;
 
 
     private void Awake() {
@@ -30,10 +29,9 @@ public class PlateKitchenObject : KitchenObject {
         if (ingredients.Count == 0) {
             if (ingredientVisual.TryGetComponent<BreadKitchenObject>(out BreadKitchenObject breadKitchenObject)) {
                 breadKitchenObject.SetPlate(this);
-                this.breadKitchenObject = breadKitchenObject;
             }
         }
-        ingredientVisual.transform.localPosition += Vector3.up * GetHeight();
+        ingredientVisual.transform.localPosition += Vector3.up * GetHeightForIngredientSpawn();
         ingredients.Add(ingredient);
         ingredientPrefabs.Add(ingredientVisual);
         OnIngredientAdded?.Invoke(this, new IngredientAddedEventArgs { ingredient = ingredient });
@@ -46,10 +44,9 @@ public class PlateKitchenObject : KitchenObject {
             Destroy(ingredient);
         }
         ingredientPrefabs.Clear();
-        breadKitchenObject = null;
     }
 
-    private float GetHeight() {
+    private float GetHeightForIngredientSpawn() {
         const string BREAD = "bread";
         const float BREAD_TOP_HEIGHT = 0.3f;
 
