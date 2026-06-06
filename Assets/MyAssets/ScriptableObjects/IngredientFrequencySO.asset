@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71a81bb8313e5b45b7de2f6913d3a58, type: 3}
+  m_Name: IngredientFrequencySO
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientFrequencySO
+  ingredientFrequencies:
+  - ingredient: {fileID: 11400000, guid: 64581d15f28dfe84b879a93fd00dc6ca, type: 2}
+    asFirst: 8
+    later: 0.25
+  - ingredient: {fileID: 11400000, guid: bf1c30b12d5fc8b4a94f32d73b417205, type: 2}
+    asFirst: 0.3
+    later: 0.3
+  - ingredient: {fileID: 11400000, guid: e9db4e402d6f4f948afff4a2b9891556, type: 2}
+    asFirst: 1
+    later: 1
+  - ingredient: {fileID: 11400000, guid: 81c0c61904c26524a962248ba58aea2c, type: 2}
+    asFirst: 0.3
+    later: 0.3
+  - ingredient: {fileID: 11400000, guid: 87a1b8ef9e8dd0f41a63b6f55c6a1488, type: 2}
+    asFirst: 1
+    later: 1
+  - ingredient: {fileID: 11400000, guid: 4399ba0a73ae5474fbaf09c36951d188, type: 2}
+    asFirst: 0.3
+    later: 0.3
+  - ingredient: {fileID: 11400000, guid: 7528846869f17bc498f11a3f1e81b221, type: 2}
+    asFirst: 1
+    later: 1
+  - ingredient: {fileID: 11400000, guid: 2fd85045131c57948bad77ff8bc8fbf9, type: 2}
+    asFirst: 0.3
+    later: 0.3
+  - ingredient: {fileID: 11400000, guid: 6f2b867477e72054abfed31e01ff30f5, type: 2}
+    asFirst: 0.3
+    later: 0.3
+  - ingredient: {fileID: 11400000, guid: 3051571cdb4605445b9d3800e94626fc, type: 2}
+    asFirst: 1
+    later: 1
