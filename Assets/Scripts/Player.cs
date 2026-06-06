@@ -74,7 +74,9 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         Vector2 inputVector = gameInput.GetMovementVectorNormalised();
         Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
+        Vector3 newForward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
+        if (newForward != Vector3.zero) transform.forward = newForward;
+
         isWalking = moveDir != Vector3.zero;
 
         float moveDistance = moveSpeed * Time.deltaTime;
