@@ -5,6 +5,12 @@ public class OrderRecipe {
 
     public List<KitchenObjectSO> ingredients;
 
+    public static OrderRecipe FromIngredients(List<KitchenObjectSO> ingredients) {
+        OrderRecipe recipe = new OrderRecipe();
+        recipe.ingredients = ingredients;
+        return recipe;
+    }
+
     public static bool AreEqual(OrderRecipe first, OrderRecipe second) {
         if (first.ingredients.Count != second.ingredients.Count) {
             return false;
@@ -17,7 +23,7 @@ public class OrderRecipe {
         }
 
         return true;
-}
+    }
 
     public static OrderRecipe Generate(IngredientFrequencySO frequency, int recipeLength) {
         OrderRecipe recipe = new OrderRecipe();

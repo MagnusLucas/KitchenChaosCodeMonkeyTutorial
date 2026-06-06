@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +17,10 @@ public class PlateKitchenObject : KitchenObject {
     private List<KitchenObjectSO> ingredients;
     private List<GameObject> ingredientPrefabs;
 
+
+    public OrderRecipe ToRecipe() {
+        return OrderRecipe.FromIngredients(ingredients);
+    }
 
     private void Awake() {
         ingredients = new List<KitchenObjectSO>();

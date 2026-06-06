@@ -20,13 +20,27 @@ public class DeliveryManager : MonoBehaviour {
         Instance = this;
         for (int i = 0; i < 3; i++) GenerateOrder();
     }
-
+    
     public List<OrderRecipe> GetWaitingOrders() { return waitingOrders; }
+
+    public bool TryCompleteOrder(OrderRecipe recipe) {
+        foreach(OrderRecipe waitingOrder in waitingOrders) {
+            if (OrderRecipe.AreEqual(waitingOrder, recipe)) {
+                waitingOrders.Remove(waitingOrder);
+                OnWaitingOrdersChanged?.Invoke(this, EventArgs.Empty);
+                return true;
+            }
+        }
+        return false;
+    }
 
     private void GenerateOrder() {
         int orderSize = baseOrderSize + completedOrders / competionsToIncreaseOrderSize;
-        waitingOrders.Add(OrderRecipe.Generate(frequencySO, orderSize));
+        OrderRecipe recipe = OrderRecipe.Generate(frequencySO, orderSize);
+        Debug.Log(recipe);
+        waitingOrders.Add(recipe);
         OnWaitingOrdersChanged?.Invoke(this, EventArgs.Empty);
     }
+
 
 }
