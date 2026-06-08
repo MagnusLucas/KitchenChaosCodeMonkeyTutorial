@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CuttingCounter : KitchenCounter, IProgressAction {
 
+    public static event EventHandler OnAnyCounterCutPerformed;
     public event EventHandler OnCutPerformed;
     public event EventHandler<ProgressEventArgs> OnProgressUpdated;
     override public event EventHandler OnKitchenObjectReceived;
@@ -34,6 +35,7 @@ public class CuttingCounter : KitchenCounter, IProgressAction {
             cuttingProgress++;
             OnProgressUpdated?.Invoke(this, new ProgressEventArgs { progress = GetProgress() });
             OnCutPerformed?.Invoke(this, EventArgs.Empty);
+            OnAnyCounterCutPerformed?.Invoke(this, EventArgs.Empty);
 
             if (cuttingProgress == recipe.cuttingProgressMax) {
                 GetKitchenObject().DestroySelf();

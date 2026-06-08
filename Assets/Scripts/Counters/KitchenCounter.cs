@@ -3,6 +3,8 @@ using UnityEngine;
 
 abstract public class KitchenCounter : MonoBehaviour, IKitchenObjectParent {
 
+    public static event EventHandler OnAnyObjectPlacedHere;
+
     virtual public event EventHandler OnKitchenObjectReceived;
     virtual public event EventHandler OnKitchenObjectRemoved;
 
@@ -77,6 +79,11 @@ abstract public class KitchenCounter : MonoBehaviour, IKitchenObjectParent {
 
     public void SetKitchenObject(KitchenObject newKitchenObject) {
         kitchenObject = newKitchenObject;
+
+        if (newKitchenObject != null) {
+            OnAnyObjectPlacedHere?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 
     public KitchenObject GetKitchenObject() {

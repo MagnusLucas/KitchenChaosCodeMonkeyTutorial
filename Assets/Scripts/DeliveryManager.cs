@@ -5,6 +5,9 @@ using UnityEngine;
 public class DeliveryManager : MonoBehaviour {
 
     public event EventHandler OnWaitingOrdersChanged;
+    public event EventHandler OnCorrectOrderDelivered;
+    public event EventHandler OnIncorrectOrderDelivered;
+
     public static DeliveryManager Instance { get; private set; }
 
     [SerializeField] private IngredientFrequencySO frequencySO;
@@ -38,12 +41,14 @@ public class DeliveryManager : MonoBehaviour {
     public bool TryCompleteOrder(OrderRecipe recipe) {
         foreach(OrderRecipe waitingOrder in waitingOrders) {
             if (OrderRecipe.AreEqual(waitingOrder, recipe)) {
-                Debug.Log(waitingOrders.Remove(waitingOrder));
+                waitingOrders.Remove(waitingOrder);
                 OnWaitingOrdersChanged?.Invoke(this, EventArgs.Empty);
                 completedOrders++;
+                OnCorrectOrderDelivered?.Invoke(this, EventArgs.Empty);
                 return true;
             }
         }
+        OnIncorrectOrderDelivered?.Invoke(this, EventArgs.Empty);
         return false;
     }
 
