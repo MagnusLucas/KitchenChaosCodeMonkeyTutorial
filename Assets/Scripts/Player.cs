@@ -35,12 +35,17 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     }
 
     private void GameInput_OnSecondaryInteractAction(object sender, EventArgs e) {
+
+        if (!KitchenGameManager.Instance.IsGamePlaying()) return;
+
         if (selectedCounter is CuttingCounter) {
             (selectedCounter as CuttingCounter).SecondaryInteract(this);
         }
     }
 
     private void GameInput_OnInteractAction(object sender, EventArgs e) {
+        if (!KitchenGameManager.Instance.IsGamePlaying()) return;
+
         selectedCounter?.Interact(this);
     }
 
