@@ -1,22 +1,18 @@
-using System;
 using TMPro;
 using UnityEngine;
 
-public class GameStartCountdownUI : MonoBehaviour {
+public class GameOverUI : MonoBehaviour {
 
-    [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private TextMeshProUGUI recipeCountText;
 
     void Start() {
         KitchenGameManager.Instance.OnStateChanged += KitchenGameManager_OnStateChanged;
         Hide();
     }
 
-    private void Update() {
-        countdownText.text = Math.Ceiling(KitchenGameManager.Instance.GetTimeToStart()).ToString();
-    }
-
     private void KitchenGameManager_OnStateChanged(object sender, System.EventArgs e) {
-        if (KitchenGameManager.Instance.IsCountdownToStartActive()) {
+        if (KitchenGameManager.Instance.IsGameOver()) {
+            recipeCountText.text = DeliveryManager.Instance.GetCompletedOrderCount().ToString();
             Show();
         } else {
             Hide();

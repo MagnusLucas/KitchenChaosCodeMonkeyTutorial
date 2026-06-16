@@ -59,5 +59,9 @@ public class DeliveryManager : MonoBehaviour {
         OnWaitingOrdersChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    public int GetCompletedOrderCount() {
+        return completedOrders;
+    }
+
 
 }

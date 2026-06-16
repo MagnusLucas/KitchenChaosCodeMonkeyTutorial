@@ -16,7 +16,7 @@ public class KitchenGameManager : MonoBehaviour {
 
     private const float WAIT_TIME = 1.0f;
     private const float COUNTDOWN_TIME = 3.0f;
-    private const float GAMEPLAY_TIME = 300.0f;
+    private const float GAMEPLAY_TIME = 3.0f;
 
 
     private State state;
@@ -66,8 +66,17 @@ public class KitchenGameManager : MonoBehaviour {
         return state == State.COUNTDOWN_TO_START;
     }
 
+    public bool IsGameOver() {
+        return state == State.GAME_OVER;
+    }
+
     public float GetTimeToStart() {
         return COUNTDOWN_TIME - stateTimer;
+    }
+
+    public float GetGameProgress() {
+        if (state != State.GAME_PLAYING) return 0;
+        return stateTimer / GAMEPLAY_TIME;
     }
 
 }
