@@ -13,6 +13,10 @@ public class CuttingCounter : KitchenCounter, IProgressAction {
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOs;
     private int cuttingProgress;
 
+    new public static void ResetStaticData() {
+        OnAnyCounterCutPerformed = null;
+    }
+
 
     public override void GetKitchenObject(Player player) {
         cuttingProgress = 0;
