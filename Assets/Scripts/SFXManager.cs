@@ -11,6 +11,12 @@ public class SFXManager : MonoBehaviour {
     [SerializeField] private List<AudioClip> objectPlacedOnCounterSFXs;
     [SerializeField] private List<AudioClip> objectTrashedSFXs;
 
+    private AudioSource audioSource;
+
+    private void Awake() {
+        audioSource = GetComponent<AudioSource>();
+    }
+
 
     private void Start() {
         DeliveryManager.Instance.OnCorrectOrderDelivered += DeliveryManager_OnCorrectOrderDelivered;
@@ -53,8 +59,13 @@ public class SFXManager : MonoBehaviour {
         return audioClips[Random.Range(0, length)];
     }
 
-    private void SimpleSound(AudioClip audioClip, Vector3 position, float volume = 1f) {
-        AudioSource.PlayClipAtPoint(audioClip, position, volume);
+
+    // Naive implementation - trusts there is only one sfx at a time. True for now.
+    private void SimpleSound(AudioClip audioClip, Vector3 position, float volumeMultiplier = 1f) {
+        transform.position = position;
+        audioSource.generator = audioClip;
+        audioSource.Play();
+        
     }
 
 }
