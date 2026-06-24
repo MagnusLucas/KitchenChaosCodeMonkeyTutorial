@@ -21,8 +21,7 @@ public class AudioMixerManager : MonoBehaviour {
     }
 
     private void Start() {
-        LoadPlayerPreferences();
-
+        LoadPlayerPreferences(); // For some reason this gets overriden between awake and start >,<
     }
 
     private void LoadPlayerPreferences() {
@@ -47,18 +46,21 @@ public class AudioMixerManager : MonoBehaviour {
     }
 
     public void AdjustAudioMixerProperty(MixerProperty property, float new_value) {
-        audioMixer.SetFloat(GetMixerPropertyName(property), new_value);
+
+        float valueForMixer = 20 * Mathf.Log10(new_value);
+
+        audioMixer.SetFloat(GetMixerPropertyName(property), valueForMixer);
 
         PlayerPrefs.SetFloat(GetMixerPropertyName (property), new_value);
         PlayerPrefs.Save();
     }
 
-    public float GetMixerPropertyValue(MixerProperty property) {
-        if (audioMixer.GetFloat(GetMixerPropertyName(property), out float value)){
-            return value;
+    public float GetPlayerMixerPropertyVolumeSetting(MixerProperty property) {
+        if (PlayerPrefs.HasKey(GetMixerPropertyName(property))) {
+            return PlayerPrefs.GetFloat(GetMixerPropertyName(property));
         }
 
-        throw new Exception("Non existent audio mixer property!");
+        return 0.5f;
     }
 
 }

@@ -40,15 +40,15 @@ public class OptionsUI : MonoBehaviour {
 
 
     private void SetCurrentSliderValues() {
-        masterSlider.value = AudioMixerManager.Instance.GetMixerPropertyValue(AudioMixerManager.MixerProperty.MASTER_VOLUME);
-        sfxSlider.value = AudioMixerManager.Instance.GetMixerPropertyValue(AudioMixerManager.MixerProperty.SFX_VOLUME);
-        musicSlider.value = AudioMixerManager.Instance.GetMixerPropertyValue(AudioMixerManager.MixerProperty.MUSIC_VOLUME);
+        masterSlider.value = AudioMixerManager.Instance.GetPlayerMixerPropertyVolumeSetting(AudioMixerManager.MixerProperty.MASTER_VOLUME);
+        sfxSlider.value = AudioMixerManager.Instance.GetPlayerMixerPropertyVolumeSetting(AudioMixerManager.MixerProperty.SFX_VOLUME);
+        musicSlider.value = AudioMixerManager.Instance.GetPlayerMixerPropertyVolumeSetting(AudioMixerManager.MixerProperty.MUSIC_VOLUME);
     }
 
-    public void Show(Action onColseButtonAction) {
-        this.onCloseButtonAction = onColseButtonAction;
+    public void Show(Action onCloseButtonAction) {
         SetCurrentSliderValues();
         gameObject.SetActive(true);
+        this.onCloseButtonAction = onCloseButtonAction;
     }
 
     private void Hide() {
