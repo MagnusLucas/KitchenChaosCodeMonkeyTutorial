@@ -13,9 +13,20 @@ public class PlatesCounter : KitchenCounter {
 
     private int numberOfPlates = 0;
     private float timer = 0;
+    private bool gameStarted = false;
+
+    private void Start() {
+        KitchenGameManager.Instance.OnStateChanged += KitchenGameManager_OnStateChanged;
+    }
+
+    private void KitchenGameManager_OnStateChanged(object sender, EventArgs e) {
+        if (KitchenGameManager.Instance.IsGamePlaying()) {
+            gameStarted = true;
+        }
+    }
 
     private void Update() {
-        if (numberOfPlates < maxPlates) {
+        if (gameStarted && numberOfPlates < maxPlates) {
             timer += Time.deltaTime;
             if (timer > timeToSpawn) {
                 timer = 0;
