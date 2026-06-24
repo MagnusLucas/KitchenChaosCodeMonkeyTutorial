@@ -31,10 +31,10 @@ public class StoveBurnWarningUI : MonoBehaviour {
     }
 
     private void Show() {
-        timer = 0;
         gameObject.SetActive(true);
     }
     private void Hide() {
+        timer = 0;
         gameObject.SetActive(false);
     }
 }

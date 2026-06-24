@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FryingRecipeSO
   ingredient: {fileID: 11400000, guid: 7528846869f17bc498f11a3f1e81b221, type: 2}
   result: {fileID: 11400000, guid: 4399ba0a73ae5474fbaf09c36951d188, type: 2}
-  fryTime: 2
+  fryTime: 10

@@ -484,8 +484,54 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7814363802720860760, guid: 78b840b5a7ee0214eaa7023fd2cf5f5a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3327075768369274880}
+    - targetCorrespondingSourceObject: {fileID: 7814363802720860760, guid: 78b840b5a7ee0214eaa7023fd2cf5f5a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4277681276397014505}
   m_SourcePrefab: {fileID: 100100000, guid: 78b840b5a7ee0214eaa7023fd2cf5f5a, type: 3}
+--- !u!1 &7608925298242408242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7814363802720860760, guid: 78b840b5a7ee0214eaa7023fd2cf5f5a, type: 3}
+  m_PrefabInstance: {fileID: 426266670904915306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3327075768369274880
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7608925298242408242}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f30ab4ccaf748be48a320c776a805fd7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4277681276397014505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7608925298242408242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2324bf04969d7514ea77327a5bb1f9ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StoveBurnFlashingBarUI
+  stoveCounter: {fileID: 1805208442462308445}
 --- !u!224 &8019723002078804244 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7683599267991096446, guid: 78b840b5a7ee0214eaa7023fd2cf5f5a, type: 3}
