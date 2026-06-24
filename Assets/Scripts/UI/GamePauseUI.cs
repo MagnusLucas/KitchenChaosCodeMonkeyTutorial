@@ -13,7 +13,7 @@ public class GamePauseUI : MonoBehaviour {
     private void Awake() {
         Instance = this;
         resumeButton.onClick.AddListener(() => { KitchenGameManager.Instance.UnpauseGame(); Hide(); });
-        optionsButton.onClick.AddListener(() => { gameObject.SetActive(false); OptionsUI.Instance.Show(); }); //temp
+        optionsButton.onClick.AddListener(() => { gameObject.SetActive(false); OptionsUI.Instance.Show(Show); });
         mainMenuButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.MAIN_MENU); Time.timeScale = 1.0f; });
     }
 

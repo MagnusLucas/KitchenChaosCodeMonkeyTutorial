@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -20,6 +21,8 @@ public class OptionsUI : MonoBehaviour {
     [SerializeField] private Button pauseButton;
 
 
+    private Action onCloseButtonAction;
+
     private void Awake() {
         Instance = this;
 
@@ -33,7 +36,7 @@ public class OptionsUI : MonoBehaviour {
             AudioMixerManager.Instance.AdjustAudioMixerProperty(AudioMixerManager.MixerProperty.MUSIC_VOLUME, value);
         });
 
-        closeButton.onClick.AddListener(() => { Hide(); GamePauseUI.Instance.Show(); });
+        closeButton.onClick.AddListener(() => { Hide(); onCloseButtonAction(); });
 
     }
 
@@ -49,7 +52,8 @@ public class OptionsUI : MonoBehaviour {
         musicSlider.value = AudioMixerManager.Instance.GetMixerPropertyValue(AudioMixerManager.MixerProperty.MUSIC_VOLUME);
     }
 
-    public void Show() {
+    public void Show(Action onColseButtonAction) {
+        this.onCloseButtonAction = onColseButtonAction;
         SetCurrentSliderValues();
         gameObject.SetActive(true);
     }
