@@ -13,6 +13,7 @@ public class SFXManager : MonoBehaviour {
     [SerializeField] private List<AudioClip> objectPlacedOnCounterSFXs;
     [SerializeField] private List<AudioClip> objectTrashedSFXs;
     [SerializeField] private AudioClip countdownSound;
+    [SerializeField] private AudioClip warningSound;
 
     private AudioSource audioSource;
 
@@ -30,6 +31,7 @@ public class SFXManager : MonoBehaviour {
         KitchenCounter.OnAnyObjectPlacedHere += KitchenCounter_OnAnyObjectPlacedHere;
         TrashCounter.OnObjectTrashed += TrashCounter_OnObjectTrashed;
     }
+
 
     private void TrashCounter_OnObjectTrashed(object sender, System.EventArgs e) {
         TrashCounter counter = sender as TrashCounter;
@@ -76,4 +78,7 @@ public class SFXManager : MonoBehaviour {
         PlaySound(countdownSound, Player.Instance.transform.position);
     }
 
+    public void PlayWarningSound(Vector3 position) {
+        PlaySound(warningSound, position);
+    }
 }
