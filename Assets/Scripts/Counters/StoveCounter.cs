@@ -62,4 +62,8 @@ public class StoveCounter : KitchenCounter, IProgressAction {
     public float GetProgress() {
         return fryTime / currentRecipe.fryTime;
     }
+
+    public bool IsBurningObject() {
+        return GetRecipeForObjectOrNull(currentRecipe.result) == null;
+    }
 }
