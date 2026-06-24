@@ -12,13 +12,6 @@ public class OptionsUI : MonoBehaviour {
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Button closeButton;
-    [SerializeField] private Button moveUpButton;
-    [SerializeField] private Button moveDownButton;
-    [SerializeField] private Button moveLeftButton;
-    [SerializeField] private Button moveRightButton;
-    [SerializeField] private Button interactButton;
-    [SerializeField] private Button secondaryInteractButton;
-    [SerializeField] private Button pauseButton;
 
 
     private Action onCloseButtonAction;

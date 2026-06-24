@@ -10,6 +10,8 @@ public class DeliveryManager : MonoBehaviour {
 
     public static DeliveryManager Instance { get; private set; }
 
+    private const int STARTING_ORDER_COUNT = 3;
+
     [SerializeField] private IngredientFrequencySO frequencySO;
     [SerializeField] private int baseOrderSize = 3;
     [SerializeField] private int competionsToIncreaseOrderSize = 3;
@@ -19,14 +21,26 @@ public class DeliveryManager : MonoBehaviour {
     private List<OrderRecipe> waitingOrders;
     private int completedOrders = 0;
     private float time = 0;
+    private bool gameStarted = false;
 
     private void Awake() {
         waitingOrders = new List<OrderRecipe>();
         Instance = this;
-        for (int i = 0; i < 3; i++) GenerateOrder();
+    }
+
+    private void Start() {
+        KitchenGameManager.Instance.OnStateChanged += KitchenGameManager_OnStateChanged;
+    }
+
+    private void KitchenGameManager_OnStateChanged(object sender, EventArgs e) {
+        if (KitchenGameManager.Instance.IsGamePlaying()) {
+            gameStarted = true;
+            for (int i = 0; i < STARTING_ORDER_COUNT; i++) GenerateOrder();
+        }
     }
 
     private void Update() {
+        if (!gameStarted) return;
         time += Time.deltaTime;
         if (time > timeToSpawn) {
             time = 0;

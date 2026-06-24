@@ -32,10 +32,7 @@ public class KeybindButton : MonoBehaviour {
         GameInput.Instance.OnBindingUpdated += (_, _) => UpdateKeybind();
 
         buttonText = GetComponentInChildren<TextMeshProUGUI>();
-        buttonText.text = GameInput.Instance.GetKeyboardBinding(binding);
-        if (buttonText.text.Length > 3) {
-            buttonText.text = buttonText.text.Substring(0, 3);
-        }
+        UpdateKeybind();
     }
 
     private void UpdateKeybind() {
