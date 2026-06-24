@@ -4,17 +4,21 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 
 public class SFXManager : MonoBehaviour {
 
+    public static SFXManager Instance { get; private set;  }
+
     [SerializeField] private List<AudioClip> correctOrderDeliveredSFXs;
     [SerializeField] private List<AudioClip> incorrectOrderDeliveredSFXs;
     [SerializeField] private List<AudioClip> cutPerformedSFXs;
     [SerializeField] private List<AudioClip> objectPickedUpSFXs;
     [SerializeField] private List<AudioClip> objectPlacedOnCounterSFXs;
     [SerializeField] private List<AudioClip> objectTrashedSFXs;
+    [SerializeField] private AudioClip countdownSound;
 
     private AudioSource audioSource;
 
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
+        Instance = this;
     }
 
 
@@ -29,29 +33,29 @@ public class SFXManager : MonoBehaviour {
 
     private void TrashCounter_OnObjectTrashed(object sender, System.EventArgs e) {
         TrashCounter counter = sender as TrashCounter;
-        SimpleSound(PickRandom(objectTrashedSFXs), counter.transform.position);
+        PlaySound(PickRandom(objectTrashedSFXs), counter.transform.position);
     }
 
     private void KitchenCounter_OnAnyObjectPlacedHere(object sender, System.EventArgs e) {
         KitchenCounter counter = sender as KitchenCounter;
-        SimpleSound(PickRandom(objectPlacedOnCounterSFXs), counter.transform.position);
+        PlaySound(PickRandom(objectPlacedOnCounterSFXs), counter.transform.position);
     }
 
     private void Player_OnPickedUpObject(object sender, System.EventArgs e) {
-        SimpleSound(PickRandom(objectPickedUpSFXs), Player.Instance.transform.position);
+        PlaySound(PickRandom(objectPickedUpSFXs), Player.Instance.transform.position);
     }
 
     private void CuttingCounter_OnAnyCounterCutPerformed(object sender, System.EventArgs e) {
         CuttingCounter counter = sender as CuttingCounter;
-        SimpleSound(PickRandom(cutPerformedSFXs), counter.transform.position);
+        PlaySound(PickRandom(cutPerformedSFXs), counter.transform.position);
     }
 
     private void DeliveryManager_OnIncorrectOrderDelivered(object sender, System.EventArgs e) {
-        SimpleSound(PickRandom(incorrectOrderDeliveredSFXs), DeliveryCounter.Instance.transform.position);
+        PlaySound(PickRandom(incorrectOrderDeliveredSFXs), DeliveryCounter.Instance.transform.position);
     }
 
     private void DeliveryManager_OnCorrectOrderDelivered(object sender, System.EventArgs e) {
-        SimpleSound(PickRandom(correctOrderDeliveredSFXs), DeliveryCounter.Instance.transform.position);
+        PlaySound(PickRandom(correctOrderDeliveredSFXs), DeliveryCounter.Instance.transform.position);
     }
 
     private AudioClip PickRandom(List<AudioClip> audioClips) {
@@ -61,11 +65,15 @@ public class SFXManager : MonoBehaviour {
 
 
     // Naive implementation - trusts there is only one sfx at a time. True for now.
-    private void SimpleSound(AudioClip audioClip, Vector3 position, float volumeMultiplier = 1f) {
+    private void PlaySound(AudioClip audioClip, Vector3 position, float volumeMultiplier = 1f) {
         transform.position = position;
         audioSource.generator = audioClip;
         audioSource.Play();
         
+    }
+
+    public void PlayCountdownSound() {
+        PlaySound(countdownSound, Player.Instance.transform.position);
     }
 
 }
